@@ -21,14 +21,15 @@ sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
 yum install -y apache-maven
 
 ## Configure MAVEN_HOME and PATH Environment Variables
-rm .bash_profile
+rm .bash_profile #used to define the environment variables#
 wget https://raw.githubusercontent.com/awanmbandi/realworld-cicd-pipeline-project/jenkins-master-client-config/.bash_profile
 source .bash_profile
-mvn -v
+mvn -v   # Check Maven Version#
 
 # Create ".m2" and download your "settings.xml" file into it to Authorize Maven
 ## Make sure to Update the RAW GITHUB Link to your "settings.xml" config
-mkdir /var/lib/jenkins/.m2
+#####Make sure to log into Nexus on the browser with the public Ip:8081 ########
+mkdir /var/lib/jenkins/.m2 #.m2 is the location where maven keeps the dependencies locally#
 wget https://raw.githubusercontent.com/awanmbandi/realworld-cicd-pipeline-project/refs/heads/jenkins-maven-sonarqube-nexus/settings.xml -P /var/lib/jenkins/.m2/
 chown -R jenkins:jenkins /var/lib/jenkins/.m2/
 chown -R jenkins:jenkins /var/lib/jenkins/.m2/settings.xml
